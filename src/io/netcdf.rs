@@ -409,7 +409,7 @@ fn attrs_to_nc(attrs: &Attrs, classic: bool) -> Result<Vec<(String, NcAttrValue)
             AttrValue::IntList(l) if classic => NcAttrValue::Ints(l.iter().map(|&x| x as i32).collect()),
             AttrValue::IntList(l) => NcAttrValue::Int64s(l.clone()),
             AttrValue::FloatList(l) => NcAttrValue::Doubles(l.clone()),
-            AttrValue::StrList(l) if classic => {
+            AttrValue::StrList(_) if classic => {
                 return Err(Error::Io(format!("attribute {k:?}: string lists need the NetCDF-4 format")));
             }
             AttrValue::StrList(l) => NcAttrValue::Strings(l.clone()),
