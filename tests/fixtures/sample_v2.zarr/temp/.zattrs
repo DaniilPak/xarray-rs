@@ -1,0 +1,9 @@
+{
+  "units": "K",
+  "long_name": "air temperature",
+  "coordinates": "lat station",
+  "_ARRAY_DIMENSIONS": [
+    "time",
+    "x"
+  ]
+}

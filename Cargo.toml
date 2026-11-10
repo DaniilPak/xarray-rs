@@ -1,0 +1,51 @@
+[package]
+name = "xarray-rs"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.91"
+authors = ["DaniilPak"]
+description = "Labelled N-dimensional arrays for Rust: named dimensions, coordinates and attributes, inspired by Python's xarray"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/DaniilPak/xarray-rs"
+documentation = "https://docs.rs/xarray-rs"
+readme = "README.md"
+keywords = ["xarray", "ndarray", "netcdf", "labelled", "scientific"]
+categories = ["science", "data-structures", "mathematics"]
+exclude = ["/.github"]
+
+[lib]
+name = "xarray_rs"
+
+[features]
+default = ["json"]
+## to_dict / from_dict JSON in xarray's dict format
+json = ["dep:serde_json"]
+## netCDF-3 classic and NetCDF-4 (HDF5) read/write, pure Rust
+netcdf = ["dep:netcdf-reader", "dep:netcdf-writer"]
+## Zarr v2/v3 stores on the local filesystem (via zarrs)
+zarr = ["dep:zarrs", "dep:serde_json"]
+
+[dependencies]
+ndarray = "0.17"
+indexmap = "2"
+chrono = { version = "0.4", default-features = false, features = ["std"] }
+num-traits = "0.2"
+thiserror = "2"
+serde_json = { version = "1", optional = true, features = ["preserve_order"] }
+netcdf-reader = { version = "0.12", optional = true, default-features = false, features = ["netcdf4"] }
+netcdf-writer = { version = "0.12", optional = true, default-features = false, features = ["netcdf4"] }
+zarrs = { version = "0.23", optional = true, default-features = false, features = ["filesystem", "gzip", "zstd", "crc32c", "blosc"] }
+
+[dev-dependencies]
+serde_json = "1"
+
+[package.metadata.docs.rs]
+all-features = true
+
+[[example]]
+name = "netcdf_convert"
+required-features = ["netcdf"]
+
+[[example]]
+name = "zarr_write"
+required-features = ["zarr"]

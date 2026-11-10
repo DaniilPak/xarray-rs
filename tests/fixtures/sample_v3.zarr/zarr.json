@@ -1,0 +1,9 @@
+{
+  "attributes": {
+    "title": "xarray-rs fixture",
+    "version": 3,
+    "scale": 0.5
+  },
+  "zarr_format": 3,
+  "node_type": "group"
+}
